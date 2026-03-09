@@ -1,0 +1,192 @@
+{
+  "business": {
+    "name": "Timeline Print Bumirejo",
+    "contact": {
+      "whatsapp": "083898121684",
+      "instagram": "@timelineprint.bumirejo"
+    },
+    "services": [
+      {
+        "category": "Print",
+        "items": [
+          {
+            "name": "Hitam Putih",
+            "price": 500
+          },
+          {
+            "name": "Warna",
+            "price": 500
+          },
+          {
+            "name": "½ Warna",
+            "price": 1000
+          },
+          {
+            "name": "Full Warna",
+            "price": 1500
+          }
+        ]
+      },
+      {
+        "category": "Copy",
+        "items": [
+          {
+            "name": "Hitam Putih",
+            "price": 250
+          },
+          {
+            "name": "Warna",
+            "price": 1000
+          }
+        ]
+      },
+      {
+        "category": "Scan",
+        "items": [
+          {
+            "name": "Scan",
+            "price": 1000
+          }
+        ]
+      },
+      {
+        "category": "Cetak Foto",
+        "items": [
+          {
+            "name": "2x3",
+            "quantity": 7,
+            "price": 3500
+          },
+          {
+            "name": "3x4",
+            "quantity": 6,
+            "price": 4500
+          },
+          {
+            "name": "4x6",
+            "quantity": 4,
+            "price": 4000
+          },
+          {
+            "name": "2R (6,35x8,89)",
+            "quantity": 1,
+            "price": 2500
+          },
+          {
+            "name": "3R (8,89x12,7)",
+            "quantity": 1,
+            "price": 3000
+          },
+          {
+            "name": "4R (10,2x15,2)",
+            "quantity": 1,
+            "price": 3500
+          },
+          {
+            "name": "5R (12,7x17,8)",
+            "quantity": 1,
+            "price": 5000
+          },
+          {
+            "name": "6R (15,2x20,3)",
+            "quantity": 1,
+            "price": 5500
+          },
+          {
+            "name": "8R (20,3x25,4)",
+            "quantity": 1,
+            "price": 8500
+          },
+          {
+            "name": "S8R (A4)",
+            "quantity": 1,
+            "price": 8500
+          }
+        ],
+        "note": "Untuk ukuran 2x3, 3x4, 4x6 bisa cetak satuan minimal 2 lembar"
+      },
+      {
+        "category": "Cetak Polaroid",
+        "items": [
+          {
+            "name": "Mini (6 x 9 cm)",
+            "unit_price": 1000,
+            "package_price": 12000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Square (8 x8 cm)",
+            "unit_price": 1200,
+            "package_price": 14000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Standar (7,5 x 9 cm)",
+            "unit_price": 1500,
+            "package_price": 16000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Strip A (5 x 15 cm)",
+            "unit_price": 2000,
+            "package_price": 20000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Strip B (7,7 x 17,8 cm)",
+            "unit_price": 2500,
+            "package_price": 25000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Snapshot A (10 x 15 cm)",
+            "unit_price": 3000,
+            "package_price": 30000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Snapshot B (11,5 x 17 cm)",
+            "unit_price": 3500,
+            "package_price": 35000,
+            "package_quantity": 15
+          },
+          {
+            "name": "Mix (1,2,3)",
+            "package_price": 15000,
+            "package_quantity": 15
+          }
+        ],
+        "note": "Jumlah isi paket adalah 15 foto. Bisa Custom. Bisa Request Ukuran"
+      },
+      {
+        "category": "Jasa Edit Dokumen",
+        "items": [
+          {
+            "name": "Jasa Ketik",
+            "price": "Rp 3000/hlm"
+          },
+          {
+            "name": "Jasa Formatting Dokumen",
+            "price": "Rp 1000/hlm",
+            "note": "Tarif menyesuaikan tingkat kerumitan dokumen dan cakupan pekerjaan. Konsultasikan draft kamu untuk penawaran harga terbaik!",
+            "services": [
+              "Perapihan Layout (Margin, Font, Spasi)",
+              "Penomoran Halaman & Daftar Isi Otomatis",
+              "Daftar Gambar, Tabel, & Lampiran",
+              "Daftar Pustaka & Catatan Kaki (Footnote)",
+              "Pembuatan Surat Resmi"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "design": {
+    "primary_color": "#FF6B5B",
+    "secondary_color": "#FFA366",
+    "accent_color": "#6B8FD9",
+    "background_light": "#E8E8F0",
+    "text_dark": "#1a1a1a",
+    "brand_style": "playful, modern, friendly"
+  }
+}
