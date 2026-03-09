@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, Instagram, ShoppingCart } from "lucide-react";
+import { Phone, Mail, Instagram, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 /**
  * Timeline Print Bumirejo - Home Page
  * Design: Playful Modern with Coral, Lavender, and Periwinkle Blue
- * Features: Service showcase, pricing display, order form, contact information
+ * Features: Service showcase, pricing display, photo gallery, custom orders, contact information
  */
 
 interface OrderItem {
@@ -18,12 +18,61 @@ interface OrderItem {
   price: number;
 }
 
+interface GalleryItem {
+  id: string;
+  title: string;
+  image: string;
+  category: string;
+  description: string;
+}
+
 export default function Home() {
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
+  const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null);
+  const [customOptions, setCustomOptions] = useState<Record<string, string>>({});
+  const [showCustomModal, setShowCustomModal] = useState(false);
+
+  const galleryItems: GalleryItem[] = [
+    {
+      id: "photo-1",
+      title: "Cetak Foto Portrait",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663369510594/U95YbHfyA34WmM5eQpZn65/photo-sample-1-EX5YqkVx2pEnxKvjP94sGt.webp",
+      category: "Cetak Foto",
+      description: "Hasil cetak foto berkualitas tinggi dengan warna yang tajam dan detail sempurna. Cocok untuk foto portrait profesional atau kenang-kenangan pribadi.",
+    },
+    {
+      id: "photo-2",
+      title: "Cetak Foto Landscape",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663369510594/U95YbHfyA34WmM5eQpZn65/photo-sample-2-H9LwQnxEpZSdEjdKf7PTBw.webp",
+      category: "Cetak Foto",
+      description: "Cetak foto landscape dengan detail yang jernih dan warna-warna yang hidup. Sempurna untuk pemandangan alam atau foto perjalanan Anda.",
+    },
+    {
+      id: "polaroid-1",
+      title: "Polaroid Standar",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663369510594/U95YbHfyA34WmM5eQpZn65/polaroid-sample-1-N3kprcviHRrQSSBUzRQmKp.webp",
+      category: "Cetak Polaroid",
+      description: "Polaroid standar dengan tampilan retro yang klasik. Sempurna untuk momen spesial yang ingin diabadikan dengan gaya vintage yang timeless.",
+    },
+    {
+      id: "polaroid-2",
+      title: "Polaroid Bunga",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663369510594/U95YbHfyA34WmM5eQpZn65/polaroid-sample-2-3mLeWEB2ckbaeBZBsLTEEW.webp",
+      category: "Cetak Polaroid",
+      description: "Cetak polaroid dengan tema alam yang indah. Warna-warna yang hangat dan tekstur vintage memberikan sentuhan personal pada setiap foto.",
+    },
+    {
+      id: "polaroid-3",
+      title: "Polaroid Strip",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663369510594/U95YbHfyA34WmM5eQpZn65/polaroid-sample-3-BrnXmFpW7mtjBoJuA3siMc.webp",
+      category: "Cetak Polaroid",
+      description: "Polaroid strip dengan 3 frame yang dapat menampilkan cerita visual. Sempurna untuk dokumentasi momen penting atau koleksi kenang-kenangan.",
+    },
+  ];
 
   const services = [
     {
@@ -129,6 +178,27 @@ export default function Home() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const handleCustomOrder = (item: GalleryItem) => {
+    setSelectedGalleryItem(item);
+    setShowCustomModal(true);
+    setCustomOptions({});
+  };
+
+  const handleSubmitCustomOrder = () => {
+    if (!selectedGalleryItem) return;
+
+    const customDetails = Object.entries(customOptions)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join("\n");
+
+    const customOrderNote = `Pesanan Custom dari Galeri:\n${selectedGalleryItem.title}\n\nDetail Custom:\n${customDetails}`;
+
+    setOrderNotes((prev) => (prev ? `${prev}\n\n${customOrderNote}` : customOrderNote));
+    toast.success(`${selectedGalleryItem.title} ditambahkan dengan custom options`);
+    setShowCustomModal(false);
+    setSelectedGalleryItem(null);
+  };
 
   const handleSubmitOrder = () => {
     if (!customerName || !customerPhone) {
@@ -251,6 +321,173 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-20 bg-gradient-to-b from-white to-[#E8E8F0]">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h2
+            className="text-5xl font-bold text-center mb-4"
+            style={{ fontFamily: "Fredoka, sans-serif", color: "#FF6B5B" }}
+          >
+            Galeri Contoh Hasil
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg">
+            Lihat contoh hasil cetak kami dan pesan dengan custom options sesuai kebutuhan Anda
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {galleryItems.map((item) => (
+              <Card key={item.id} className="overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer">
+                <div className="relative overflow-hidden h-64">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3
+                      className="text-xl font-bold"
+                      style={{ fontFamily: "Fredoka, sans-serif", color: "#FF6B5B" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <span className="text-xs bg-[#6B8FD9] text-white px-3 py-1 rounded-full">
+                      {item.category}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 text-sm mb-4">{item.description}</p>
+                  <button
+                    onClick={() => handleCustomOrder(item)}
+                    className="w-full btn-coral text-sm py-2"
+                  >
+                    Pesan dengan Custom
+                  </button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Order Modal */}
+      {showCustomModal && selectedGalleryItem && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md bg-white">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3
+                  className="text-2xl font-bold"
+                  style={{ fontFamily: "Fredoka, sans-serif", color: "#FF6B5B" }}
+                >
+                  Custom Order
+                </h3>
+                <button
+                  onClick={() => setShowCustomModal(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="mb-4">
+                <img
+                  src={selectedGalleryItem.image}
+                  alt={selectedGalleryItem.title}
+                  className="w-full h-40 object-cover rounded-lg mb-3"
+                />
+                <p className="font-semibold text-gray-800">{selectedGalleryItem.title}</p>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Ukuran Cetak
+                  </label>
+                  <select
+                    value={customOptions["Ukuran"] || ""}
+                    onChange={(e) =>
+                      setCustomOptions({ ...customOptions, Ukuran: e.target.value })
+                    }
+                    className="w-full border-2 border-[#E8E8F0] rounded-lg p-2 focus:border-[#FF6B5B] focus:outline-none"
+                  >
+                    <option value="">Pilih ukuran...</option>
+                    <option value="2x3">2x3 cm</option>
+                    <option value="3x4">3x4 cm</option>
+                    <option value="4x6">4x6 cm</option>
+                    <option value="A4">A4 (21x29.7 cm)</option>
+                    <option value="Custom">Custom Size</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Jenis Kertas
+                  </label>
+                  <select
+                    value={customOptions["Kertas"] || ""}
+                    onChange={(e) =>
+                      setCustomOptions({ ...customOptions, Kertas: e.target.value })
+                    }
+                    className="w-full border-2 border-[#E8E8F0] rounded-lg p-2 focus:border-[#FF6B5B] focus:outline-none"
+                  >
+                    <option value="">Pilih jenis kertas...</option>
+                    <option value="Glossy">Glossy (Mengkilap)</option>
+                    <option value="Matte">Matte (Doff)</option>
+                    <option value="Semi-Glossy">Semi-Glossy</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Jumlah Lembar
+                  </label>
+                  <Input
+                    type="number"
+                    min="1"
+                    value={customOptions["Jumlah"] || "1"}
+                    onChange={(e) =>
+                      setCustomOptions({ ...customOptions, Jumlah: e.target.value })
+                    }
+                    placeholder="Masukkan jumlah"
+                    className="rounded-lg border-2 border-[#E8E8F0] focus:border-[#FF6B5B]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Catatan Khusus (Opsional)
+                  </label>
+                  <Textarea
+                    value={customOptions["Catatan"] || ""}
+                    onChange={(e) =>
+                      setCustomOptions({ ...customOptions, Catatan: e.target.value })
+                    }
+                    placeholder="Tuliskan permintaan khusus Anda..."
+                    className="rounded-lg border-2 border-[#E8E8F0] focus:border-[#FF6B5B] min-h-20"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowCustomModal(false)}
+                  className="flex-1 py-2 px-4 border-2 border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={handleSubmitCustomOrder}
+                  className="flex-1 btn-coral py-2 px-4"
+                >
+                  Tambah ke Pesanan
+                </button>
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
 
       {/* Order Section */}
       <section
