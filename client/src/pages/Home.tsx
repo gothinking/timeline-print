@@ -60,7 +60,7 @@ export default function Home() {
     },
     {
       id: "polaroid-2",
-      title: "Polaroid Bunga",
+      title: "Polaroid Snapshots",
       image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663369510594/U95YbHfyA34WmM5eQpZn65/polaroid-sample-2-3mLeWEB2ckbaeBZBsLTEEW.webp",
       category: "Cetak Polaroid",
       description: "Cetak polaroid dengan tema alam yang indah. Warna-warna yang hangat dan tekstur vintage memberikan sentuhan personal pada setiap foto.",
