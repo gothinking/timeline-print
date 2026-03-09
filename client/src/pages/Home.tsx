@@ -461,7 +461,7 @@ export default function Home() {
             <Card className="service-card text-center">
               <Mail className="w-16 h-16 mx-auto mb-4 text-[#FF6B5B]" />
               <h3 className="text-2xl font-bold mb-2 text-gray-800">Lokasi</h3>
-              <p className="text-gray-600">Bumirejo, Jawa Timur</p>
+              <p className="text-gray-600">Tiban, Bumirejo, Mungkid, Magelang</p>
             </Card>
           </div>
         </div>
